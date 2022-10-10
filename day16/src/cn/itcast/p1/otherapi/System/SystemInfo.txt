@@ -1,0 +1,58 @@
+系统信息：
+
+sun.desktop：windows
+awt.toolkit：sun.awt.windows.WToolkit
+java.specification.version：11
+sun.cpu.isalist：amd64
+sun.jnu.encoding：GBK
+java.class.path：D:\IdeaProjects\S1 -code\out\production\day16
+java.vm.vendor：Oracle Corporation
+sun.arch.data.model：64
+user.variant：
+java.vendor.url：http://java.oracle.com/
+user.timezone：
+os.name：Windows 10
+java.vm.specification.version：11
+sun.java.launcher：SUN_STANDARD
+user.country：CN
+sun.boot.library.path：D:\jdk-11.0.5\bin
+sun.java.command：cn.itcast.p1.otherapi.System.SystemDemo
+jdk.debug：release
+sun.cpu.endian：little
+user.home：C:\Users\王海龙
+user.language：zh
+java.specification.vendor：Oracle Corporation
+java.version.date：2019-10-15
+java.home：D:\jdk-11.0.5
+file.separator：\
+java.vm.compressedOopsMode：Zero based
+line.separator：
+
+java.specification.name：Java Platform API Specification
+java.vm.specification.vendor：Oracle Corporation
+java.awt.graphicsenv：sun.awt.Win32GraphicsEnvironment
+user.script：
+sun.management.compiler：HotSpot 64-Bit Tiered Compilers
+java.runtime.version：11.0.5+10-LTS
+user.name：王海龙
+path.separator：;
+os.version：10.0
+java.runtime.name：Java(TM) SE Runtime Environment
+file.encoding：UTF-8
+java.vm.name：Java HotSpot(TM) 64-Bit Server VM
+java.vendor.version：18.9
+java.vendor.url.bug：http://bugreport.java.com/bugreport/
+java.io.tmpdir：C:\Users\王海龙\AppData\Local\Temp\
+java.version：11.0.5
+user.dir：D:\IdeaProjects\S1 -code
+os.arch：amd64
+java.vm.specification.name：Java Virtual Machine Specification
+java.awt.printerjob：sun.awt.windows.WPrinterJob
+sun.os.patch.level：
+java.library.path：D:\jdk-11.0.5\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;D:\Python38\Scripts\;D:\Python38\;C:\Program Files (x86)\Common Files\Intel\Shared Libraries\redist\intel64\compiler;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;D:\MySQL\MySQL Server 5.5\bin;C:\Users\王海龙\AppData\Local\Microsoft\WindowsApps;D:\jdk1.8.0_73\bin;;.
+java.vendor：Oracle Corporation
+java.vm.info：mixed mode
+java.vm.version：11.0.5+10-LTS
+sun.io.unicode.encoding：UnicodeLittle
+java.class.version：55.0
+

@@ -1,0 +1,57 @@
+Graphical User Interface： 图形用户接口
+Java为GUI提供的对象都存在java.awt(重量级) 和 java.swing(轻量级)
+
+容器中组件的摆放方式就是：布局
+常见的布局管理器：
+FlowLayout(流式布局管理器)：
+    ·从左到右的顺序排列，放心下，就从下面接着放
+    ·Panel默认的布局管理器
+BorderLayout(边界布局管理器)：指定方向
+    ·东西南北中
+    ·Frame默认的布局管理器
+GridLayout(网格布局管理器)：规则的矩阵
+CardLayout(卡片布局管理器)：选项卡
+GridBagLayout(网格包布局管理器): 非规则的矩阵
+
+要想让组件有效果，添加事件监听机制：
+事件监听机制：
+
+1：事件源(组件): 承载事件的载体（小强）
+2：事件(Event):: （被揍）
+3：监听器(Listener):（保镖）
+4：事件处理(引发事件后处理方式): （我挡！ 就是处理方式）
+
+——————————————————————————————
+
+TextField  tf = new TextFile();文本框
+文本框可以（指定列数），（默认的文本String） （或者文本+列数）
+
+
+——————————————————————————————————————————
+【窗体监听器】：
+        f.addWindowListener(new 其适配器实现类WindowAdapter);
+
+ void windowClosing​(WindowEvent e) 当用户尝试从窗口的系统菜单关闭窗口时调用。
+______________________________________________________________________
+在按钮上添加【活动监听器 】：
+        but.addActionListener(new ActionListener);//只有一个方法不需要适配器
+
+void actionPerformed​(ActionEvent e) 发生操作时调用。
+_______________________________________________________________________
+在按钮上添加【鼠标监听器】：
+        but.addMouseListener(new 其适配器类MouseAdapter);
+ void mouseClicked​(MouseEvent e)      在组件上单击（按下并释放）鼠标按钮时调用。
+       e.getClickCount(); 鼠标一次点击的次数
+ void mouseEntered​(MouseEvent e)      鼠标放到组件时调用。
+ __________________________________________________________________________
+ 如果说一个按钮上同时具有 活动监听器和鼠标监听器：鼠标点击时
+ 鼠标监听器优先运行！！！
+____________________________________________________________________________
+给文本框添加【键盘监听】：
+        tf.addKeyListener(new 其适配器 KeyAdapter);
+void keyPressed(KeyEvent e);   按下键时调用。
+    getKeyChar(); 获取键盘输入的字符  getKeyCode();获取字符对应的int数字
+
+KeyEvent:键盘事件
+KeyEvent静态方法：大写转化字符
+KeyEvent.getKeyText(e.getKeyCode()) + "::" + e.getKeyCode())

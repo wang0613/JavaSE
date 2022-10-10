@@ -1,0 +1,109 @@
+集合类的由来：
+    对象用于封装特有数据，对象多了需要存储，如果对象的个数不确定
+    就要使用集合容器
+集合的特点：
+    1.用于存储对象的容器
+    2.集合的长度是可变的
+    3.集合中不可以存储基本数据类型
+
+集合容器因为能力不的数据结构不同，有多种具体容器
+不断的向上抽取，就形成了集合框架
+
+框架的顶层就是Collection ：
+
+Collection的常见功能：
+1.添加
+    boolean  add(Object o); 添加对象一个
+    boolean  addAll(Collection c); 将所有元素添加到集合中
+2.删除
+     boolean remove(Object o)  删除一个
+     boolean removeAll(Collection c) 删除一堆
+     void clear()  移除此 collection 中的所有元素
+
+3.判断
+     boolean contains(Object o)  判断是否包含指定的元素，
+     boolean containsAll(Object o)  判断集合否包含指定的集合元素，
+     boolean isEmpty();    判断集合是否有元素
+4.获取
+     int size()    返回此 collection 中的元素数
+     Iterator  iterator();   取出元素的方式：迭代器 返回一个迭代器对象
+     该对象必须依赖具体的容器，因为每一个容器的内部数据结构都不相同
+     所以该迭代器是在容器中进行内部实现的
+     对于使用容器者而言，具体的实现不重要，只要通过容器获取到该实现的迭代器对象即可
+     也就是iterator方法
+
+     Iterator接口就是对所有Collection容器进行元素取出的公共接口
+
+5.其他
+     boolean retainAll(Collection col) 取交集
+     Object[] toArray(); 将集合转成数组。
+-------------------------------------------------------------------------------
+Collection：
+        List ： 有序(存入和取出的顺序一样)，元素都有索引，可以定义重复的元素
+        Set :   不包含重复元素的集合,无序,【保证唯一】
+List的特有方法：有一个共性特点：都可以操作角标
+
+添加：
+        void      add(int index, element)
+        将指定的元素插入此列表中的指定位置（可选操作）
+        void      add(int index,Collection )
+删除：
+        Object      remove(index)
+修改：
+        Object      set(index, element)``
+获取：
+        Object       get(index)
+        int          indexOf(object)
+        int          lastIndexOf(object)
+        int          subList(from,to)
+List集合是可以对元素增删改查的集合
+
+List:
+    Vector: 内部是数组数据结构 ，同步，线程是安全的，增删查询都慢
+    ArrayList:  内部是数组数据结构 ，不同步的， 替代了Vector， 查询的速度很快
+    LinkedList: 内部是链表数据结构，是不同步的， 增删元素的速度很快（包括null）
+
+LinkedList:
+    addFirst()
+    addLast()
+jdk1.6
+    offerFirst()
+    offerLast()
+    getFirst()  //获取元素但是不删除，如果链表为空，抛出NoSuchElementException
+    getLast()
+jdk 1.6之后：
+    peekFirst() //获取但不删除，如果链表为空，返回null
+    peekLast()
+    removeFirst() //获取元素但是删除
+    removeLast()
+jdk1.6
+    pollFirst() //获取并移除，如果链表为空，返回null
+    pollLast()
+列表迭代器和迭代器的区别：
+（1）ListIterator有add()方法，可以向List中添加对象，而Iterator不能
+（2）ListIterator和Iterator都有hasNext()和next()方法，可以实现顺序向后遍历，但是ListIterator有hasPrevious()和previous()方法，可以实现逆向（顺序向前）遍历。Iterator就不可以。
+（3）ListIterator可以定位当前的索引位置，nextIn+dex()和previousIndex()可以实现。Iterator没有此功能。
+（4）都可实现删除对象，但是ListIterator可以实现对象的修改，set()方法可以实现。Iierator仅能遍历，不能修改。
+ ------------------------------------------------------------
+Set:
+    元素不可以重复，是无序的
+    Set接口中的方法和collection中一致，看其子类
+         HashSet 内部结构数据是哈希表，是不同步的，对集合的迭代次序不作任何保证，允许null元素，保证唯一
+              哈希表确定元素是否相同
+                 1.判断两个元素的哈希值是否相同
+                    如果相同，再判断两个对象的内容是否相同
+                  2.判断哈希值相同，其实判断的是对象的hashCode方法，
+                    判断内容相同，用的是equals方法
+              注意：哈希值不相同，是不需要判断equals。
+              其子类 LinkedHashSet 保证顺序
+         TreeSet 可以对Set集合中的元素进行排序【按照字典的顺序】，是不同步的。
+            判断元素的唯一性方式：就是  根据比较方法的返回值是不是为0 ,是0，则就是相同元素
+
+            TreeSet对元素进行排序的方式一:
+            让【元素】本身具备比较功能，元素需要实现Comparable接口，覆盖重写compareTo方法
+            注意：字符串本身就实现了Comparable接口，具有CompareTo方法，根据元素的比较结果来确定比较顺序。
+
+            如果不要按照对象中具备的自然顺序进行排序。如果对象不具备自然排序。
+            可以使用第二种方式：
+            让【集合】本身具备比较功能，定义一个类实现Comparator接口，覆盖重写compare方法
+            将该类对象作为参数传递给TreeSet集合的构造函数

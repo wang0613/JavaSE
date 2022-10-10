@@ -1,0 +1,21 @@
+序列化运行时将每个可序列化类与版本号相关联，称为serialVersionUID，
+在反序列化期间使用该版本号来验证序列化对象的发送方和接收方是否已加载与该序列化兼容的该对象的类。
+
+如果接收者已经为具有与相应发送者类别不同的serialVersionUID的对象加载了类，
+则反序列化将导致InvalidClassException 。
+
+可序列化类可以通过声明名为"serialVersionUID"必须为static，
+final和long类型的字段来显式声明其自己的serialVersionUID：
+
+//声明id号,声明id号之后，修饰符可以改变
+private static final long serialVersionUID = 9527l;
+
+注意：
+private static int age; //静态的东西，无法写入到内存中，静态在方法区中的静态区
+
+如果有内容，不方便写入，但是不可以静态，怎么？
+transient:
+public transient String name;
+
+
+

@@ -1,0 +1,118 @@
+网络模型：
+    OSI（开放系统互联）参考模型：
+    TCP/IP参考模型：
+网络通信要素：
+    IP地址：
+    端口号：
+    传输协议：
+
+IP地址：InetAddress
+    网络中设备的标识
+    本机回环地址：192.0.0.1 主机名：localhost
+端口号：
+    逻辑端口：用于给进程的应用程序标识
+    物理端口: 真实存在的接口
+    有效端口：0~65535，其中0~1024系统使用或保留端口
+传输协议：
+    通讯的规则：
+    常见协议：
+    TCP：数据传输控制协议，特点：必须建立连接，形成数据传输的通道，
+    通过三次握手，完成连接，是可靠协议， 因为必须建立连接，效率稍低。
+
+    UDP：数据包协议，特点：不需要建立连接，将数据及源和目的封装在数据包中，
+    数据包大小限制在64k内，因为无连接，速度快，但是不可靠。
+————————————————————————————————————————————————————————————————————————————
+Socket：
+    Socket就是为了网络服务提供的一种机制
+    通信的两端都有Socket
+    网络通信其实就是Socket间的通信
+    数据在两个Socket间通过IO传输
+UDP传输：
+   创建UDP传输的发送端
+         * 思路：
+         *  1.建立UDP的Socket服务。
+         DatagramSocket ds = new DatagramSocket();
+         *  2.将要发送的数据封装到数据包中
+         DatagramPackage dp = new DatagramPackage(buf,buf.length,InetAddress.getByName(""),10000);
+         *  3.通过UDP的Socket服务将数据包发送出去
+         ds.send(dp);
+         *  4.关闭Socket服务
+         *
+   创建udp传输接收端：
+         *  1.建立socket服务，【因为是要接收数据，必须要明确端口号。】
+           DatagramSocket ds = new DatagramSocket();
+         *  2.创建数据包，用于存储接收到的数据，方便用数据包对象的方法，解析这些数据
+          DatagramPackage dp = new DatagramPackage(buf,0,buf,length);
+         *  3.使用socket服务的receive方法将接收到的数据，存储到数据包中
+         ds.receive(dp);
+         *  4.通过数据包的方法 解析数据包中的数据
+         dp.getAddress.getHostAddress();
+         sp.getPort();
+         dp.getData();___>new String(dp.getData(),0,dp.getLength);
+__________________________________________________________
+TCP传输：
+    Socket和ServerSocket服务
+    建立客户端 和服务器端ss.accept();
+    建立连接后，通过Socket中的IO流进行数据传输 s.getOutputStream
+    关闭Socket
+Socket：
+    构造可以通过：Socket（）; 空参可以通过connect()方法连接到指定的服务器
+    Socket(InetAddress, int port); 指定连接IP对象 到指定端口
+    Socket(String host, int port); 指定IP的字符串表现形式， 到指定端口
+
+————————————————————————————————————————————————————————————
+TCP和UDP不同之处：
+    1.TCP需要建立三次确认连接
+    2.UDP的Socket既能传输又能接收，而TCP分为两个部分 Socket（客户端）和ServerSocket（服务器端）
+——————————————————————————————————————————————————————————————————————————————————
+最常见的客户端：
+    浏览器：IE
+最常见的服务端：
+    服务器：Tomcat 默认端口8080
+
+为了了解其原理：
+
+1.自定义服务端
+使用已有的客户端IE，了解一下客户端给服务端发了什么请求？
+
+发送的请求是：
+192.168.0.110
+GET / HTTP/1.1 【请求行】 请求方式:GET  /myweb/1.html 请求的资源路径   http/1.1:协议版本
+Host: 192.168.0.110:9090 //访问的主机
+Connection: keep-alive   //
+Upgrade-Insecure-Requests: 1
+//浏览器信息
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.113 Safari/537.36 Edg/81.0.416.58
+//请求消息头    属性名：属性值
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Accept-Encoding: gzip, deflate  //告诉服务端支持的压缩方式
+Accept-Language: zh-CN,zh;q=0.9,en;q=0.8,en-GB;q=0.7,en-US;q=0.6
+空行连接
+//请求体
+
+——————————————————————————————————————————————
+HTTP： 超文本数据传输协议
+FTP：文本传输协议，文件的上传和下载
+————————————————————————————————————————————————————————————————
+URL ：统一资源定位符，它是指向互联网“资源”的指针
+    http://www.192.168.0.110:9090 这就是url定位符，
+URI ：统一资源标识符，笼统的说，每一个URL都是URI，但是不是每一个URI都是URL
+    【定位符只是标识符中的一种】
+URN：统一资源名称
+
+网络结构：
+1.C/S client/server
+
+    特点：
+        该结构的软件，客户端和服务端都需要编写
+        开发成本较高，维护较为麻烦
+    好处：
+        客户端在本地可以分担一些运算。
+
+2.B/S  browser/server
+    特点：
+        该结构的软件只开发服务器端，不开发客户端，因为客户端直接由浏览器取代
+        开发成本相对低，维护更为简单
+
+    缺点：所有运算都在服务器端完成
+

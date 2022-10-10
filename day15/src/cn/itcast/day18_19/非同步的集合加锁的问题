@@ -1,0 +1,33 @@
+——----------------------------------------------------------------
+给非同步的集合加锁：
+List list = new ArrayList();
+list = myCollections.synList(list);//返回一个同步的list
+
+--------------------------
+class MyCollections {
+    public static List synList(List list){
+        return new MyList();
+    }
+
+    //内部类
+    private class MyList implements List {
+
+        private List list;
+        private static final Object lock = new Object();
+
+        MyList(List list) {
+           this.list = list;
+        }
+        public boolean add(Object obj) {
+             synchronized(lock){
+                 return list.add(obj)
+             }
+        }
+        //一个线程添加元素的时候，另一个线程删除不了
+        public boolean remove(Object obj) {
+              synchronized(lock){
+                 return list.remove(obj)
+              }
+        }
+    }
+}

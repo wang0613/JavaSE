@@ -1,0 +1,11 @@
+static Runtime     getRuntime();
+获取当前运行时
+
+int   availableProcessors()
+返回可用于Java虚拟机的处理器数量。
+
+Process    exec(String command)
+执行系统文件，返回一个process进程是一个抽象类
+
+      Process抽象类中的方法：
+        abstract void           destroy();杀死子进程。

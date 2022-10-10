@@ -1,0 +1,150 @@
+泛型:
+    jdk 1.5出现的安全机制。
+好处：
+    1.将运行时的问题ClassCastException转到了编译时期、
+    2.避免了强制类型转换的麻烦。
+<>什么时候用：
+    当操作的引用数据类型不确定的时候，就用<> ,将要操作的数据类型引入即可。
+    其实<> 就是一个用于接收具体引用数据类型的参数范围。
+在程序中，只要用到了带有<>的类或者接口，就要明确传入的具体数据引用类型
+
+泛型技术是给编译器使用的技术，用于编译时期，确保了类型的安全。
+
+运行时，会将泛型去掉，生成的class文件中是不带泛型的，这个称之为泛型的擦除。
+为什么擦除呢？因为兼容运行时的类加载器
+
+泛型的补偿：在运行期间，通过获取元素的类型进行转换动作，不用使用者强制类型转换了
+泛型里面只能放[引用数据类型 ]
+
+泛型的通配符 ： ？ 叫做未知类型
+_________________________________________________________
+集合中的一些技巧：
+    需要唯一吗？
+       需要： Set
+            需要制定顺序： TreeSet
+            不需要顺序：   HashSet
+            但是：想要有一个和存储一致的顺序（有序）：LinkedHashSet
+       不需要: List
+            需要频繁增删吗？
+                需要:LinkedList
+                不需要：ArrayList
+                效率低：Vector
+如果记录每一个容器的结构和所属体系呢？
+    看名字:
+
+    List:
+        ArrayList:
+        LinkedList:
+    Set:
+        HashSet:
+        TreeSet:
+后缀名就是该集合所属的体系.  List:重复  Set：唯一
+前缀名就是该集合的数据结构.
+    看到Array就是数组，查询快，有角标。
+    看到Linked 就是链表，就是增删快，就要想到 add get remove+ first last的方法
+    看到Hash 就是哈希表，就要想到唯一性，就要想要元素需要覆盖hashcode方法和equals方法
+    看到Tree 就要想到二叉树， 就要想到排序，就像想要 Comparable覆盖重写compareTo 和Comparator覆盖重写compare方法
+
+    而且这些常用的集合容器是不同步的。
+-------------------------------------------------------------------
+Map集合：一次添加一对元素。 Collection集合：一次添加一个元素
+    其实map集合中存储的是键值对。
+    map集合中必须保证键的唯一性（K）。
+Map 接口主要有两个实现类：HashMap 类和 TreeMap 类。
+    其中，HashMap 类按哈希算法来存取键对象，
+    而 TreeMap 类可以对键对象进行排序。
+
+常用方法:
+    添加：
+        value  put(Key value)；返回前一个和key关联的值，如果没有返回null。
+    删除：
+        void clear(); 清空map集合
+        value remove(Key); 根据指定的key删除这个键对。
+    判断：
+        boolean containsKey(Key); 如果此映射包含指定键的映射，则返回 true 。
+        boolean containsValue(value);如果此地图将一个或多个键映射到指定的值，则返回 true 。
+        boolean isEmpty();如果此地图不包含键值映射，则返回 true 。
+    获取：
+        value  get(key)； 返回到指定键所映射的值，如果没有改键返回null。
+        当然可以通过返回null，来确定是否包含指定键。
+        int size()    返回此地图中键值映射的数量。
+keySet(): Set<K>    keySet();返回Set集合，利用迭代器获取键，用map集合get()方法获取值
+
+entrySet()： Set<Map.Entry<K,V>>   entrySet(); 返回Set集合；
+
+Collection<V> values();方法演示; 获取所有的Value,返回到集合中
+-------------------------------------------
+Map常见的子类：
+    Hashtable: 内部结构就是哈希表， 是同步的，不允许null键和null值
+        其常见子类：Properties:用来存储键值对型的配置文件的信息。可以和IO技术结合
+    HashMap： 内部结构是哈希表， 是不同步的，允许null键和null值
+        其子类：  LinkedHashMap: 不会对键进行排序，什么时候进，什么时候出。
+    TreeMap： 内部结构是二叉树， 不同步的，可以对Map集合中的键进行排序。
+--------------------------------------
+Collections 集合工具类： 里面都是静态方法
+
+static <T extends Comparable<? super T>> void     sort(List<T> list)
+根据其元素的natural ordering对指定的列表进行排序。
+static <T> void              sort(List<T> list, Comparator<? super T> c)
+根据指定的比较器引起的顺序对指定的列表进行排序。
+
+static void      swap(List<?> list, int i, int j)
+交换指定列表中指定位置的元素。
+
+static <T> int    binarySearch(List<? extends Comparable<? super T>> list, T key)
+使用二叉搜索算法搜索指定对象的指定列表。
+
+static <T>        max(Collection coll)
+根据其元素的 自然顺序返回给定集合的最大元素。
+static <T>       max(Collection  coll, Comparator comp)
+根据指定的比较器引发的顺序返回给定集合的最大元素。
+static <T extends Object & Comparable<? super T>>T     min(Collection<? extends T> coll)
+根据其元素的 自然顺序返回给定集合的最小元素。
+static <T> T             min(Collection<? extends T> coll, Comparator<? super T> comp)
+根据指定的比较器引发的顺序返回给定集合的最小元素。
+static <T> Comparator<T>         reverseOrder()
+可以经具备自然排序的元素顺序逆转
+
+static void               reverse(List<?> list)
+反转List排序。
+
+static <T> boolean        replaceAll(List<T> list, T oldVal, T newVal)
+将列表中一个指定值的所有出现替换为另一个。
+
+static <T> void            fill(List<? super T> list, T obj)
+用指定的元素代替指定列表的所有元素
+static void                shuffle(List<?> list)  随机排序
+------------------------------
+static <T> XXX<T>          synchronizedXXX(XXX x)
+ 可以将非同步的集合转换为同步的（Collection，List，Map，Set等）
+--------------------------------------
+——-----------------------------------
+Arrays：数组工具类，里面的方法都是静态的
+    static <T> List<T>         asList(T... a)
+        将数组转换为List集合
+
+    static int        binarySearch(xxx[] x, xxx x)
+        二分法查找xxx数组(布尔类型除外)
+    static int       binarySearch(xxx[] x, int fromIndex, int toIndex, xxx x)
+        指定位置二分查找
+
+    static int[]      copyOf(int[] original, int newLength)
+        copy出一个新的数组，返回一个新的数组
+    static int[]      copyOfRange(int[] original, int from, int to)
+        copy出一个新的数组，指定位置开始和结束，返回一个新的数组
+    static boolean    equals(int[] a, int[] a2)
+        如果两个指定的int数组元素相同，顺序相同，则返回 true 。
+    static void       fill(int[] a, int val)
+        将数组中的元素，全部替换为指定元素
+    static void       fill(int[] a, int fromIndex, int toIndex, int val)
+        将数组中的元素，指定位置替换为指定元素
+    static int        hashCode(int[] a)
+        根据指定数组的内容返回哈希码。
+    static void       parallelSort(int[] a)
+        按照数字顺序排列指定的数组
+    static void       sort(int[] a)
+        按照数字顺序排列指定的数组。
+    static void       sort(int[] a, int fromIndex, int toIndex)
+        按升序排列数组的指定范围。
+    static String     toString(int[] a)
+    返回指定数组的内容的字符串表示形式。
